@@ -1,29 +1,29 @@
 1. Read a CSV and print output to console 
-
+ANS:
 df_cars = spark.read.csv('/FileStore/Sample_data/CARS.csv', header=True, inferSchema=True)
 df_cars.show()
 
 
 2. Read a JSON file and print output to console 
-
+ANS:
 df_households = spark.read.json('/FileStore/Sample_data/Households.json')
 df_households.show()
 
 
 3. Read parquet file and print output to console 
-
+ANS:
 df_parquet = spark.read.parquet('/FileStore/Sample_data/cleaned_data.parquet')
 df_parquet.show()
 
 
 4. Read a avro file and print output to console 
-
+ANS:
 df_avro = spark.read.format('avro').load('/FileStore/Sample_data/cleaned_data1.avro')
 df_avro.show()
 
 
 5. Example for broadcast join (Inner join 2 dataframes)
-
+ANS:
 from pyspark.sql import functions as F
 
 df_customer = spark.read.csv('/FileStore/Sample_data/CUSTOMER.csv', header=True, inferSchema=True)
@@ -32,18 +32,18 @@ df_broadcast_join.show()
 
 
 6. Example for Filtering the data 
-
+ANS:
 df_filtered = df_customer.filter(df_customer['age'] > 30)
 df_filtered.show()
 
 
 7. Example for applying aggregate functions like  max, min, avg 
-
+ANS:
 df_customer.agg(F.max("salary").alias("Max Salary"), F.min("salary").alias("Min Salary"), F.avg("salary").alias("Average Salary")).show()
 
 
 8. Example for Read json file with typed schema (without infering the schema) with Structtype, StructField .....
-
+ANS:
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 
 schema = StructType([
@@ -57,19 +57,19 @@ df_typed_json.show()
 
 
 9. Example for increase and decrease number of dataframe partitions 
-
+ANS:
 df_repartitioned = df_cars.repartition(10)  # Increase partitions to 10
 df_coalesced = df_cars.coalesce(2)  # Decrease partitions to 2
 
 
 10. Example for renaming the column of the dataframe 
-
+ANS:
 df_renamed = df_cars.withColumnRenamed("old_column_name", "new_column_name")
 df_renamed.show()
 
 
 11. Example for adding a new column to the dataframe 
-
+ANS:
 df_with_new_col = df_cars.withColumn("new_column", F.lit("new_value"))
 df_with_new_col.show()
 
@@ -83,7 +83,7 @@ sample json:
 ]
 
 A. Comeup with your own data , add more data points 
-
+ANS:
 [
   { "name" : "john doe", "dob" : "01-01-1980" },
   { "name" : "john adam", "dob" : "01-01-1960", "phone" : 1234567890 },
@@ -93,8 +93,8 @@ A. Comeup with your own data , add more data points
 
 
 B. I want you to read the above dataset into dataframe 
-
-# Assuming you have created a JSON file with the data
+ANS:
+# I have created a JSON file with the data
 df_json = spark.read.json('/FileStore/Sample_data/Households.json')
 df_json.show()
 
@@ -107,7 +107,7 @@ Json file structure should look like
 }
 
 hint: read string as rdd , use struct function on dataframe 
-
+ANS:
 from pyspark.sql import functions as F
 
 # Create a new column 'personal_data' with a struct that contains 'name', 'dob', and 'phone'
